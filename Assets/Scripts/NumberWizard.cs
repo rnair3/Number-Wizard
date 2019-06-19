@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class NumberWizard : MonoBehaviour
 {
     [SerializeField] int max = 1000;
     [SerializeField] int min = 1;
+
+    [SerializeField] TextMeshProUGUI guessText;
+
     int guess;
 
     // Start is called before the first frame update
@@ -16,49 +20,24 @@ public class NumberWizard : MonoBehaviour
 
     void StartGame()
     {
-        guess = (min + max) / 2;
-        max = max + 1;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //if (Input.GetKeyDown(KeyCode.UpArrow))
-        //{
-        //    //Debug.Log("Higher Value");
-        //    min = guess;
-        //    NextGuessNumber();
-        //}
-        //else if (Input.GetKeyDown(KeyCode.DownArrow))
-        //{
-        //    //Debug.Log("Lower Value");
-        //    max = guess;
-        //    NextGuessNumber();
-        //}
-        //else if (Input.GetKeyDown(KeyCode.Return))
-        //{
-        //    Debug.Log("Correct Value");
-        //    StartGame();
-        //}
-
-        
+        NextGuessNumber();
     }
 
     public void GetHigher()
     {
-        min = guess;
+        min = guess + 1;
         NextGuessNumber();
     }
 
     public void GetLower()
     {
-        max = guess;
+        max = guess - 1;
         NextGuessNumber();
     }
 
     void NextGuessNumber()
     {
-        guess = (min + max) / 2;
-       // Debug.Log("Is your number higher or lower than the guessed number " + guess);
+        guess = Random.Range(min, max + 1);
+        guessText.text = guess.ToString();
     }
 }
